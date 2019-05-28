@@ -79,8 +79,8 @@ int main(int argc, char **argv) {
            printf("\n");
            ksone(res1.dist, res1.number, res1.scale, &d, &prob);
            printf("%.2e\n", d);
-           Dd = fopen ("Dd.txt", "a");
-           fprintf(Dd, "%.6f\n",d);       
+           Dd = fopen ("p-value_distribution.txt", "a");
+           fprintf(Dd, "%.2e\n",prob);       
            fclose(Dd);                    
            printf("%.2e\n", prob);
            fprintf(outresult,"%s  ", argv[1]); 

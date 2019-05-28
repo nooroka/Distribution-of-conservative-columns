@@ -47,18 +47,19 @@ int main(int argc, char **argv) {
     
     while (!feof(myfile)  ) {
        mysequence1 = seqread(myfile, sqc, seqall);    
-       violent = mysequence1.length;
+       violent = mysequence1.length;      
        sqc+=1;   
        sqcall = sqc;
        printf("\nSqc is cycle: %d\n",sqc);
        /*free_seq(&mysequence1);*/
     } /* while (!feof(myfile)) */
-
+ 
     
     printf("\nSqc is: %d\n",sqc);
     res1 = distancepro(violent, seqall, sqcall); 
     free_seq(&mysequence1);
     printf("\nNumber of conservative columns: %d\n", res1.n);
+    printf("Sequence length real: %d", violent);
     if (res1.n == 0){
         printf("\nNo  conservative columns:(");
         exit (1);
@@ -78,13 +79,13 @@ int main(int argc, char **argv) {
            printf("%.6f",res1.D);
            printf("\n");
            ksone(res1.dist, res1.number, res1.scale, &d, &prob);
-           printf("%.2e\n", d);
-           Dd = fopen ("p-value1.txt", "a");
-           fprintf(Dd, "%.2e\n",prob);       
-           fclose(Dd);                    
-           printf("%.2e\n", prob);
+           printf("%.4e\n", d);
+           Dd = fopen ("p-value0.9_distribution.txt", "a");
+           fprintf(Dd, "%.2e\n",prob);
+           fclose(Dd);
+           printf("%.4e\n", prob);
            fprintf(outresult,"%s  ", argv[1]); 
-           fprintf(outresult,"%.2e\n", prob); 
+           fprintf(outresult,"%.4e\n", prob); 
            free_intervals(&res1);
     }    
     fclose(myfile);

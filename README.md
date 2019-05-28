@@ -1,16 +1,15 @@
-Данные программы компилируются при помощи compile.sh.
-proteins.h, alignments_abs.h, alignments_not_abs.h - заголовочные файлы,
-razbor_proteins.c, razbor_alignments_abs.c, razbor_alignments_not_abs.c - содержат функции для чтения 
-набора последовательностей и набора выравниваний, вычисления интервалов между заданными аминокислотами 
-или консервативными колонками, сравнения эмпирического и теоретического распределений по критерию Колмогорова-Смирнова. 
-Для выравниваний написана дополнительная функция проверки колонки на консервативность.
-runprogram.c, runprogram_abs.c, runprogram_not_abs.c - запускает эти функции для заданного набора последовательностей или выравниваний.
+These programs can be compiled with "сompile.sh". <br>
+"proteins.h", "alignments_abs.h", "alignments_not_abs.h" are header files,
+"razbor_proteins.c", "razbor_alignments_abs.c", "razbor_alignments_not_abs.c" contain functions for reading  
+a set of sequences and a set of alignments, calculating the intervals between given amino acids
+or by conservative columns, comparing empirical and theoretical distributions according to the Kolmogorov-Smirnov criterion.
+For alignments, an additional function was written to check the column for conservatism.
+"runprogram.c", "runprogram_abs.c", "runprogram_not_abs.c" - run these functions for a given set of sequences or alignments.
 
 
-Порог консервативности не задается через командную строку, задается вручную в функции проверки на консервативность.
-запуск программы:
-1. для аминокислотных последовательностей запускается команда вида ./yourprogram ваш_массив_последовательностей  заданная_аминокислота файл_с_результатом ваш_порог_p-значения
-2. для выравниваний - был создан bash-файл runsh.sh, который проходит по папке с файлами с выравниваниями и для каждого файла с выравниваниями 
-вычисляет D-статистику и p-значение. Затем при помощи файла lookatyourres.py можно вычислить процент выравниваний, p-значение для которых
-меньше заданного порога.
- 
+The conservativeness threshold is not set via the command line; it is set manually as a function of checking for conservatism.
+Program launch: <br>
+1. for amino acid sequences, a command  like ./yourprogram of yours_array_specified_specified_amino acid_file_with_a result of your_por_p-value is launched
+2. for alignments - a bash-program "runsh.sh" was created.  It passes through the folder with files with alignments and for each file with alignments
+computes D-statistic and p-value. Then, using the "lookatyourres.py", you can calculate the percentage of alignments, the p-value for which
+less than the specified threshold. 
