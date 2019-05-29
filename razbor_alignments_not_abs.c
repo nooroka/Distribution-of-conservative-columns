@@ -1,4 +1,4 @@
-#include "alignments_not_abs.h"
+#include "sequence3.h"
 /*write destructors for releasing memory*/
 #define NMAX 2000 
 #define EPS1 0.001
@@ -126,26 +126,54 @@ void seqwrite(FILE *outfastafile, struct seq sequence, int k){
    return;
 }
 int isconservative(struct seq seqall[SIZE], int wl, int sqcall){ 
-   int truef = 1;
+   int truef = 2;
    int sqcr = 0;
    int maxseql = 900;
-   char sym;  
-   for (sqcr = 1; sqcr < sqcall; sqcr++){           /*sizeof(seqall[SIZE])/sizeof(seqall[0]) + 4*/            
-      struct seq S = seqall[sqcr - 1];
+   char sym;
+   int isk = 0;
+   int count = 0;
+   int count1 = 0;
+   int ki = 0;
+   int kl = 0;
+   int maxnamelen = 22;
+   char mass[sqcall];
+   /*char massac[21] = {'A','G','P','K','L','V','I','N','M','E','D','F','C','T','R','S','Y','W','Q','H','-'};   /*no*/
+   char massac[] = "AGPKLVINMEDFCTRSYWQH";
+   /*int massint[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};*/
+   int massint[22];
+  /* massint = calloc(22, sizeof massint[0]);*/
+   for (int bi = 0; bi < 21; bi++) {
+        massint[bi] = 0;
+    }
+   for (int mi = 0; mi < sqcall; mi++) {
+        mass[mi] = 0;
+    }
+   for (sqcr = 0; sqcr < sqcall; sqcr++){                    
       struct seq S2 = seqall[sqcr];
-      char * S_sequence = S.sequence; 
-      char  S_sequence1 = S.sequence[wl];
       char * S2_sequence = S2.sequence; 
-      char  S2_sequence2 = S2.sequence[wl];  
-      if ((S_sequence1 != '-' || S2_sequence2 != '-') &&(S_sequence1 != '.' || S2_sequence2 != '.')){         
-          if (S_sequence1 != S2_sequence2){ /*uninitialised*/
-             truef = 2; 
-          }
-      } 
-      else if  (S_sequence1 == '-' || S2_sequence2 == '-' || S_sequence1 == '.' || S2_sequence2 == '.'){
-        truef = 2;
+      char  S2_sequence2 = S2.sequence[wl];
+      for (int ki = 0; ki < 21; ki++){
+         if (massac[ki] == S2_sequence2){
+             massint[ki]+=1;
+           }
+         }
       }
+     
+   
+   for (kl = 0; kl < 21; kl++){
+       if (massint[kl] > 0){
+           mass[count] = massint[kl];  
+           /*printf("%d",massint[kl]);*/
+           count+=1;
+       }
    }
+   for (count = 0; count < sqcall; count++){
+       if ((float)mass[count]/sqcall >= 0.9) {
+         /* printf("KUKAREKU ");
+          printf("%d\n", mass[count]);*/
+          truef = 1;
+          }
+      }
    return truef;     
 }
 struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) {
@@ -162,11 +190,13 @@ struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) 
 
     result.dist = (float *) malloc(sizeof(float) * maxnum);
     i = 0;
+    int sumlength = 0;
     for (wl = 0; wl < violent; wl++) {
         dada = isconservative(seqall, wl, sqcall);
-        printf("%d", dada);  
+        printf("%d", dada); 
         if ( dada == 1) {
             result.dist[i] = (float)temp + 1;
+            sumlength += (float)temp + 1;
             printf("\nDist is: %.4f ", result.dist[i]); 
             temp = 0;
             i++;
@@ -180,9 +210,11 @@ struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) 
         }
     }
     result.dist[i] = temp;
+    sumlength += temp;
     printf("\nDist is: %.4f ", result.dist[i]); 
     result.number = i + 1; 
     result.n = i; 
+    printf("\nSumlength is %d ", sumlength);
     qsort(result.dist, i + 1, sizeof(int), cmp );    
     result.E = (float *) malloc(sizeof(float) * result.number);
     result.F = (float *) malloc(sizeof(float) * result.number);
@@ -245,7 +277,7 @@ order. */
   sqren = sqrt(en);
   *d=0.0;
   for (j=1; j<=n; j++) { // Loop over the sorted data points.
-    fn = j/en; // Data�s c.d.f. after this step.
+    fn = j/en; // Data's c.d.f. after this step.
     ff= 1.0 - exp(-data[j-1]/scale); // Compare to the user-supplied function.
     if (fabs(fo - ff) > fabs(fn - ff)) dt = fabs(fo - ff); else dt = fabs(fn - ff); // Maximum distance.
     if (dt > *d) *d = dt;

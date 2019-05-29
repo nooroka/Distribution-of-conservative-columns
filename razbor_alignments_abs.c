@@ -1,4 +1,4 @@
-#include "alignments_abs.h"
+#include "sequence3.h"
 /*write destructors for releasing memory*/
 #define NMAX 2000 
 #define EPS1 0.001
@@ -159,10 +159,11 @@ struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) 
     int j = 0;
     int maxnumber = 1000;
     int dada;
-
+    int consall = 0;
     result.dist = (float *) malloc(sizeof(float) * maxnum);
     i = 0;
     for (wl = 0; wl < violent; wl++) {
+        consall += 1;
         dada = isconservative(seqall, wl, sqcall);
         printf("%d", dada);  
         if ( dada == 1) {
@@ -207,7 +208,8 @@ struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) 
             maxl = b;
         }
     }
-    result.D = result.M[maxl];    
+    result.D = result.M[maxl];
+    printf("\nAll columns are: %d ", consall);    
     return result;
 }
 
