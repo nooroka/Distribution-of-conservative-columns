@@ -1,4 +1,4 @@
-#include "sequence3.h"
+#include "alignments_abs.h"
 #define SIZE	800
 int main(int argc, char **argv) {
     /*arg1 is infile, arg2 is amino acid, arg3 is outfile*/

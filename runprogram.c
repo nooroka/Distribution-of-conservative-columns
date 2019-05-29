@@ -1,4 +1,4 @@
-#include "sequence3.h"
+#include "proteins.h"
 
 int main(int argc, char **argv) {
     /*arg1 is infile, arg2 is amino acid, arg3 is outfile*/

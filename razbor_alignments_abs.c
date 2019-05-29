@@ -1,4 +1,4 @@
-#include "sequence3.h"
+#include "alignments_abs.h"
 /*write destructors for releasing memory*/
 #define NMAX 2000 
 #define EPS1 0.001
