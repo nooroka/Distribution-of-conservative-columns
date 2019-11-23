@@ -1,4 +1,4 @@
-These programs can be compiled with "ñompile.sh". <br>
+These programs can be compiled with "compile.sh". <br>
 "proteins.h", "alignments_abs.h", "alignments_not_abs.h" are header files,
 "razbor_proteins.c", "razbor_alignments_abs.c", "razbor_alignments_not_abs.c" contain functions for reading  
 a set of sequences and a set of alignments, calculating the intervals between given amino acids
