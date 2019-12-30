@@ -14,7 +14,6 @@ int cmp(const void * x1, const void * x2)
 struct seq seqall[SIZE];
 
 struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
-   /* char seqall[100];*/
     char sym;
     int maxlen = 1000, m = 800;
     int maxnamelen = 200;
@@ -26,10 +25,6 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
     seqall[sqc].name = (char *)malloc(maxnamelen*sizeof(char ));
     seqall[sqc].description = (char *)malloc(maxdesclen*sizeof(char )); 
     seqall[sqc].sequence = (char *) calloc(maxseqlen,sizeof(char ));  
-  /*  if (seqall[sqc].sequence == NULL) {
-        seqall[sqc].sequence = (char *) malloc(maxseqlen*sizeof(char )); 
-    } */
-
     seqall[sqc].length = 0;
     int violent;
     sym = fgetc(infastafile);
@@ -64,8 +59,6 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
        }
     } 
     else {
-      /*fprintf(stderr, "First symbol is %c\n", sym);
-      perror("\nNot fasta!\n");*/
       exit(1);
     }
 
@@ -86,14 +79,7 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
         sym = fgetc(infastafile);
         if (sym == '>') {            
             tmp = ftell(infastafile);
-         /* printf("%ld\n", tmp);*/
             fseek(infastafile, tmp - 1, SEEK_SET);
-        /*  printf("%ld\n", tmp);*/
-          
-         /*   seqall[sqc].name = result.name;
-            seqall[sqc].description = result.description;
-            seqall[sqc].sequence = result.sequence;*/
-            
            
         }
    }
