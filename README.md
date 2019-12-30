@@ -4,10 +4,10 @@ These programs can be compiled with "compile.sh". <br>
 a set of sequences and a set of alignments. These functions calculate the intervals between given amino acids
 or  conservative column and compare empirical and theoretical distributions according to the Kolmogorov-Smirnov criterion.
 For alignments, an additional function was written to check the column for conservatism.
-"runprogram.c", "runprogram_abs.c", "runprogram_not_abs.c" - run these functions for a given set of sequences or alignments.
+The programs named "runprogram.c", "runprogram_abs.c", "runprogram_not_abs.c" - run these functions for a given set of sequences or alignments.
 
 
-The conservativeness threshold is not set via the command line; it is set manually as a function of checking for conservatism.
+The conservativeness threshold is set manually as a function of checking for conservatism.
 Program launch: <br>
 1. for amino acid sequences, a command  like ./yourprogram of yours_array_specified_specified_amino acid_file_with_a result of your_por_p-value is launched
 2. for alignments - a bash-program "runsh.sh" was created.  It passes through the folder with files with alignments and for each file with alignments
