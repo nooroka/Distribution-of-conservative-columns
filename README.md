@@ -9,7 +9,7 @@ The programs named "runprogram.c", "runprogram_abs.c", "runprogram_not_abs.c" - 
 
 The conservativeness threshold is set manually as a function of checking for conservatism.
 Program launch: <br>
-1. for amino acid sequences, a command  like ./yourprogram of yours_array_specified_specified_amino acid_file_with_a result of your_por_p-value is launched
+1. for amino acid sequences, a command  like ./yourprogram of yours_array_specified specified_amino acid file_with_a result of your_p-value is launched
 2. for alignments - a bash-program "runsh.sh" was created.  It passes through the folder with files with alignments and for each file with alignments
 computes D-statistic and p-value. Then, using the "lookatyourres.py", you can calculate the percentage of alignments, the p-value for which
 less than the specified threshold. 
