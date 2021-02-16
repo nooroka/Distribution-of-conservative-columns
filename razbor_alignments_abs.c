@@ -64,7 +64,6 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
 
     t3 = 0;
     sym = fgetc(infastafile);
-   /* result.sequence[t3] = *(int *) malloc(mama*sizeof(int));*/
     while (!feof(infastafile) && sym != '>' ) { 
        /* printf("%c",sym);*/
         if ( isalpha(sym) || sym == '-' || sym == '~' || sym == '.' ) {
@@ -134,8 +133,7 @@ int isconservative(struct seq seqall[SIZE], int wl, int sqcall){
    }
    return truef;     
 }
-struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) {
-   
+struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) {  
     struct intervals result;
     int temp = 0;
     int maxnum = 9000;
