@@ -47,11 +47,6 @@ void free_intervals(struct intervals *x);
 void free_seq(struct seq *x);
 double probks(double alam);
 void ksone(float *data, int n, float scale, double *d, double *prob);
-/* *mean1(struct intervals irr1);
-double *variance1(struct intervals irr1);*/
 
-/*float probks(float alam);*/
-/*void ksone(struct intervals irr, float (*func)(float), float *d,
-	float *prob);*/
 
 
