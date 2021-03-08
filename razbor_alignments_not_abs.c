@@ -14,7 +14,6 @@ int cmp(const void * x1, const void * x2)
 struct seq seqall[SIZE];
 
 struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
-   /* char seqall[100];*/
     char sym;
     int maxlen = 1000, m = 800;
     int maxnamelen = 200;
@@ -26,10 +25,6 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
     seqall[sqc].name = (char *)malloc(maxnamelen*sizeof(char ));
     seqall[sqc].description = (char *)malloc(maxdesclen*sizeof(char )); 
     seqall[sqc].sequence = (char *) calloc(maxseqlen,sizeof(char ));  
-  /*  if (seqall[sqc].sequence == NULL) {
-        seqall[sqc].sequence = (char *) malloc(maxseqlen*sizeof(char )); 
-    } */
-
     seqall[sqc].length = 0;
     int violent;
     sym = fgetc(infastafile);
@@ -64,8 +59,6 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
        }
     } 
     else {
-      /*fprintf(stderr, "First symbol is %c\n", sym);
-      perror("\nNot fasta!\n");*/
       exit(1);
     }
 
@@ -86,15 +79,7 @@ struct seq seqread(FILE *infastafile, int sqc, struct seq seqall[SIZE]) {
         sym = fgetc(infastafile);
         if (sym == '>') {            
             tmp = ftell(infastafile);
-         /* printf("%ld\n", tmp);*/
             fseek(infastafile, tmp - 1, SEEK_SET);
-        /*  printf("%ld\n", tmp);*/
-          
-         /*   seqall[sqc].name = result.name;
-            seqall[sqc].description = result.description;
-            seqall[sqc].sequence = result.sequence;*/
-            
-           
         }
    }
  
@@ -137,11 +122,8 @@ int isconservative(struct seq seqall[SIZE], int wl, int sqcall){
    int kl = 0;
    int maxnamelen = 22;
    char mass[sqcall];
-   /*char massac[21] = {'A','G','P','K','L','V','I','N','M','E','D','F','C','T','R','S','Y','W','Q','H','-'};   /*no*/
    char massac[] = "AGPKLVINMEDFCTRSYWQH";
-   /*int massint[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};*/
    int massint[22];
-  /* massint = calloc(22, sizeof massint[0]);*/
    for (int bi = 0; bi < 21; bi++) {
         massint[bi] = 0;
     }
@@ -163,14 +145,11 @@ int isconservative(struct seq seqall[SIZE], int wl, int sqcall){
    for (kl = 0; kl < 21; kl++){
        if (massint[kl] > 0){
            mass[count] = massint[kl];  
-           /*printf("%d",massint[kl]);*/
            count+=1;
        }
    }
    for (count = 0; count < sqcall; count++){
        if ((float)mass[count]/sqcall >= 0.9) {
-         /* printf("KUKAREKU ");
-          printf("%d\n", mass[count]);*/
           truef = 1;
           }
       }
@@ -225,7 +204,6 @@ struct intervals distancepro (int violent, struct seq seqall[SIZE], int sqcall) 
         result.F[d] = (float)(1 - exp(-result.dist[d]/result.scale));
         
         if (d > 0) {
-/*           result.M[d] = fmax(fabs(result.E[d] - result.F[d]), fabs(result.E[d - 1] - result.F[d])); */
              if (fabs(result.E[d] - result.F[d]) > fabs(result.E[d - 1] - result.F[d])) result.M[d] = fabs(result.E[d] - result.F[d]);
              else result.M[d] =  fabs(result.E[d - 1] - result.F[d]);
         }
