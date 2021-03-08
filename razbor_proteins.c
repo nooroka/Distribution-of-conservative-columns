@@ -58,18 +58,13 @@ struct seq seqread(FILE *infastafile) {
        }
     } 
     else {
-      /*fprintf(stderr, "First symbol is %c\n", sym);
-      perror("\nNot fasta!\n");*/
       exit(1);
     }
 
     t3 = 0;
     sym = fgetc(infastafile);
-   /* result.sequence[t3] = *(int *) malloc(mama*sizeof(int));*/
     while (!feof(infastafile) && sym != '>' ) { 
-       /* printf("%c",sym);*/
         if ( isalpha(sym) || sym == '-' || sym == '~' || sym == '.' ) {
-           /* result.sequence[t3] = (char )malloc(mama*sizeof(char ));*/
             result.sequence[t3] = sym;
             t3++;
             if (t3 >= maxseqlen){
@@ -80,9 +75,7 @@ struct seq seqread(FILE *infastafile) {
         sym = fgetc(infastafile);
         if (sym == '>') {
             tmp = ftell(infastafile);
-         /* printf("%ld\n", tmp);*/
             fseek(infastafile, tmp - 1, SEEK_SET);
-        /*  printf("%ld\n", tmp);*/
         }
    }
    result.sequence[t3] = '\0';
@@ -141,16 +134,7 @@ struct intervals distancepro (struct seq chain, char residue) {
     }
     result.dist[i] = temp;
     result.number = i + 1;
- 
     result.n = i;
-
-/*    printf("Non sorted %d intervals between given residues  ", result.number); 
-    while (j < result.number) {
-        printf("%.1f ", result.dist[j]);
-        j++;
-    } 
-    printf("\n"); */
-
     qsort(result.dist, i + 1, sizeof(int), cmp );
     
     result.E = (float *) malloc(sizeof(float) * result.number);
@@ -162,7 +146,6 @@ struct intervals distancepro (struct seq chain, char residue) {
         result.F[d] = (float)(1 - exp(-result.dist[d]/result.scale));
         
         if (d > 0) {
-/*           result.M[d] = fmax(fabs(result.E[d] - result.F[d]), fabs(result.E[d - 1] - result.F[d])); */
              if (fabs(result.E[d] - result.F[d]) > fabs(result.E[d - 1] - result.F[d])) result.M[d] = fabs(result.E[d] - result.F[d]);
              else result.M[d] =  fabs(result.E[d - 1] - result.F[d]);
         }
