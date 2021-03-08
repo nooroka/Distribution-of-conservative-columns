@@ -5,8 +5,6 @@ int main(int argc, char **argv) {
     struct seq mysequence1;
     
     FILE *myfile;
-//    FILE *outfile;
-//    FILE *outfile2;
     FILE *outresult;
     FILE *Dd;
     struct intervals res1;
@@ -42,8 +40,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
  
-   
-/*    outfile2 = fopen ("outR.txt", "w"); */
+ 
     
     while (!feof(myfile)  ) {
        mysequence1 = seqread(myfile, sqc, seqall);    
@@ -51,8 +48,7 @@ int main(int argc, char **argv) {
        sqc+=1;   
        sqcall = sqc;
        printf("\nSqc is cycle: %d\n",sqc);
-       /*free_seq(&mysequence1);*/
-    } /* while (!feof(myfile)) */
+    }
 
     
     printf("\nSqc is: %d\n",sqc);
@@ -64,16 +60,9 @@ int main(int argc, char **argv) {
         exit (1);
     }
 
-  /*  while (i < res1.number) {
-           printf("%.2f ", res1.dist[i]);
-           i++;          
-    } */
+
     printf("\n");
     if (res1.n > 4 ){
-    /*       printf ("%s\n", mysequence1.name);
-           printf ("%s\n", mysequence1.description);
-           printf ("%s\n", mysequence1.sequence);
-           printf("Sorted %d intervals between given residues  ", res1.number); */
            printf("D manual ");
            printf("%.6f",res1.D);
            printf("\n");
