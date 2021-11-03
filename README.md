@@ -1,8 +1,6 @@
 These programs can be compiled with "compile.sh". <br>
 "proteins.h", "alignments_abs.h", "alignments_not_abs.h" are header files,
-"razbor_proteins.c", "razbor_alignments_abs.c", "razbor_alignments_not_abs.c" contain functions for reading  
-a set of sequences and a set of alignments. These functions calculate the intervals between given amino acids
-or  conservative column and compare empirical and theoretical distributions according to the Kolmogorov-Smirnov criterion.
+"razbor_proteins.c", "razbor_alignments_abs.c", "razbor_alignments_not_abs.c" contain functions for reading  a set of sequences and a set of alignments. These functions calculate the intervals between given amino acids or  conservative column and compare empirical and theoretical distributions according to the Kolmogorov-Smirnov criterion.
 For alignments, an additional function was written to check the column for conservatism.
 The programs named "runprogram.c", "runprogram_abs.c", "runprogram_not_abs.c" - run these functions for a given set of sequences or alignments.
 
